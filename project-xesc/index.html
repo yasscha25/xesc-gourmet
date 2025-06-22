@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xesc Gourmet - Delivery de Cuina Gourmet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+
+       @font-face {
+         font-family: 'Melodrame';
+         src: url('fonts/melodrame.ttf') format('truetype');
+         font-weight: normal;
+         font-style: normal;
+       }
+       body {
+         margin: 0;
+         font-family: 'Melodrame', sans-serif;
+       }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --dark-gray: #404040;
+            --light-gray: #8a8a8a;
+            --gold: #d4af37;
+            --gold-dark: #b8941f;
+            --white: #ffffff;
+            --cream: #f8f6f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--gold-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--primary-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--primary-black);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background: var(--secondary-black);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: var(--primary-black);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-gray);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold);
+        }
+
+        .menu-item-image {
+            height: 300px;
+            background: var(--dark-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+        }
+
+        .menu-item-content {
+            padding: 2rem;
+        }
+
+        .menu-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .menu-item p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .menu-item .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--primary-black);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            height: 400px;
+            background: var(--dark-gray);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--secondary-black);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: var(--primary-black);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--dark-gray);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary-black);
+            border: 1px solid var(--dark-gray);
+            border-radius: 10px;
+            color: var(--white);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-gray);
+        }
+
+        footer p {
+            color: var(--light-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-item {
+                min-width: auto;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element.gold {
+            color: var(--gold);
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            bottom: 30%;
+            left: 5%;
+            font-size: 2rem;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    
+</style>
+
+    <style>
+
+       @font-face {
+         font-family: 'Melodrame';
+         src: url('fonts/melodrame.ttf') format('truetype');
+         font-weight: normal;
+         font-style: normal;
+       }
+       body {
+         margin: 0;
+         font-family: 'Melodrame', sans-serif;
+       }
+
+
+      /* Constrain logo dimensions */
+      .logo img {
+        max-height: 120px;
+        width: auto;
+      }
+    
+</style>
+
+</head>
+<body>
+    <header>
+      <nav class="container">
+        <a href="#" class="logo">
+          <!-- Ajusta aquí la ruta a la carpeta img/ -->
+          <img src="img/logo-blanco.png" alt="ESC Gourmet Logo">
+        </a>
+        <ul class="nav-links">
+          <li><a href="#inici">Inici</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#nosaltres">Nosaltres</a></li>
+          <li><a href="#contacte">Contacte</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inici">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Xesc Gourmet</h1>
+                    <p class="subtitle">Cuina Gourmet a Casa Teva</p>
+                    <p class="description">
+                        Descobreix l'autèntic sabor de la cuina mediterrània amb els nostres plats estrella: 
+                        l'Arroz Negro i els Canelons artesanals. Delivery ràpid i qualitat excepcional.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#menu" class="btn btn-primary">Veure Menú</a>
+                        <a href="#contacte" class="btn btn-secondary">Fer Comanda</a>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-element gold">🍴</div>
+            <div class="floating-element gold">⭐</div>
+        </section>
+
+        <section class="menu" id="menu">
+            <div class="container">
+                <h2 class="section-title">Els Nostres Plats Estrella</h2>
+                <div class="menu-grid">
+                    <div class="menu-item fade-in">
+                        <div class="menu-item-image"></div>
+                        <div class="menu-item-content">
+                            <h3>Arròs negre</h3>
+                            <p>
+                                Un clàssic de la cuina mediterrània elaborat amb els millors ingredients: 
+                                arròs bomba, sípia fresca, gambes, all i julivert. Cuinat amb el fons 
+                                de peix més aromàtic per aconseguir aquest color i sabor únics.
+                            </p>
+                            <div class="price">10,00 € /pers. <small>(mín. 2)</small></div>
+                        </div>
+                    </div>
+                    <div class="menu-item fade-in">
+                        <div class="menu-item-image"></div>
+                        <div class="menu-item-content">
+                            <h3>Canelons gourmet</h3>
+                            <p>
+                                Canelons fets a mà amb pasta fresca, farcits amb un ragù de carn de vedella 
+                                i porc, bechamel casolana i gratinats amb formatge parmesà. La recepta 
+                                tradicional que et transportarà a casa de l'àvia.
+                            </p>
+                            <div class="price">9,00 € /tres unts.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="nosaltres">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <h2>La Nostra Passió</h2>
+                        <p>
+                            A Xesc Gourmet, creiem que la bona cuina no ha de ser només per a ocasions especials. 
+                            Cada plat que elaborem porta la passió i l'experiència de més de 20 anys en la restauració.
+                        </p>
+                        <p>
+                            Utilitzem només ingredients de primera qualitat, respectem les receptes tradicionals 
+                            i aplicem tècniques culinàries que realcen el sabor natural de cada ingredient.
+                        </p>
+                        <p>
+                            El nostre servei de delivery et permet gaudir d'aquesta experiència gourmet 
+                            des de la comoditat de casa teva, mantenint sempre la qualitat i el sabor intactes.
+                        </p>
+                    </div>
+                    <div class="about-image fade-in"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contacte">
+            <div class="container">
+                <h2 class="section-title">Contacte</h2>
+                <div class="contact-content">
+                    <div class="contact-info fade-in">
+                        <h3>Informació de Contacte</h3>
+                        <p><strong>Telèfon:</strong> +34 93 XXX XX XX</p>
+                        <p><strong>Email:</strong> info@xescgourmet.cat</p>
+                        <p><strong>Horari:</strong></p>
+                        <p>Dilluns a Divendres: 12:00 - 15:00 | 19:00 - 23:00</p>
+                        <p>Caps de setmana: 12:00 - 23:00</p>
+                        <p><strong>Zona de Repartiment:</strong> Barcelona i àrea metropolitana</p>
+                        <p><strong>Temps de Lliurament:</strong> 30-45 minuts</p>
+                    </div>
+                    <div class="contact-form fade-in">
+                        <h3>Fes la teva Comanda</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefon">Telèfon</label>
+                                <input type="tel" id="telefon" name="telefon" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adreca">Adreça de Lliurament</label>
+                                <input type="text" id="adreca" name="adreca" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comanda">Comanda</label>
+                                <textarea id="comanda" name="comanda" rows="4" placeholder="Especifica els plats i quantitats..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Comanda</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Xesc Gourmet. Tots els drets reservats.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gràcies per la teva comanda! Et contactarem aviat per confirmar els detalls.');
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
