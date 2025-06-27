@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xesc Gourmet - Delivery de Cuina Gourmet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definir la fuente Melodrame */
+        @font-face {
+            font-family: 'Melodrame';
+            src: url('fonts/melodrame.woff2') format('woff2'),
+                 url('fonts/melodrame.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --dark-gray: #404040;
+            --light-gray: #8a8a8a;
+            --gold: #d4af37;
+            --gold-dark: #b8941f;
+            --white: #ffffff;
+            --cream: #f8f6f0;
+            --whatsapp-green: #25d366;
+            /* Variables de fuente */
+            --font-melodrame: 'Melodrame', 'Playfair Display', serif;
+            --font-elegant: 'Playfair Display', serif;
+            --font-body: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: var(--font-melodrame);
+            font-size: 2rem;
+            font-weight: normal;
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            letter-spacing: -1px;
+        }
+
+        .logo:hover {
+            color: var(--gold-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: var(--font-melodrame);
+            font-size: 4.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-family: var(--font-body);
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            font-family: var(--font-body);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            z-index: 20;
+            position: relative;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            z-index: 20;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--primary-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--primary-black);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp-green);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20c75a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #20c75a;
+            transform: scale(1.1);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background: var(--secondary-black);
+        }
+
+        .section-title {
+            font-family: var(--font-melodrame);
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+            font-weight: 300;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: var(--primary-black);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-gray);
+        }
