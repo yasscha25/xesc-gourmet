@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xesc Gourmet - Delivery de Cuina Gourmet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definir la fuente Melodrame */
+        @font-face {
+            font-family: 'Melodrame';
+            src: url('fonts/melodrame.woff2') format('woff2'),
+                 url('fonts/melodrame.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --dark-gray: #404040;
+            --light-gray: #8a8a8a;
+            --gold: #d4af37;
+            --gold-dark: #b8941f;
+            --white: #ffffff;
+            --cream: #f8f6f0;
+            --whatsapp-green: #25d366;
+            /* Variables de fuente */
+            --font-melodrame: 'Melodrame', 'Playfair Display', serif;
+            --font-elegant: 'Playfair Display', serif;
+            --font-body: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: var(--font-melodrame);
+            font-size: 2rem;
+            font-weight: normal;
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            letter-spacing: -1px;
+        }
+
+        .logo:hover {
+            color: var(--gold-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: var(--font-melodrame);
+            font-size: 4.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-family: var(--font-body);
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            font-family: var(--font-body);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            z-index: 20;
+            position: relative;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            z-index: 20;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--primary-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--primary-black);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp-green);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20c75a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #20c75a;
+            transform: scale(1.1);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background: var(--secondary-black);
+        }
+
+        .section-title {
+            font-family: var(--font-melodrame);
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+            font-weight: 300;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: var(--primary-black);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-gray);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold);
+        }
+
+        .menu-item-image {
+            height: 300px;
+            background: var(--dark-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+        }
+
+        .menu-item-content {
+            padding: 2rem;
+        }
+
+        .menu-item h3 {
+            font-family: var(--font-melodrame);
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-shadow: 0 1px 4px rgba(212, 175, 55, 0.2);
+            font-weight: 300;
+        }
+
+        .menu-item p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-family: var(--font-body);
+        }
+
+        .menu-item .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            font-family: var(--font-elegant);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--primary-black);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-melodrame);
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+            font-weight: 300;
+        }
+
+        .about-text p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-family: var(--font-body);
+        }
+
+        .about-image {
+            height: 400px;
+            background: var(--dark-gray);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--secondary-black);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-melodrame);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-shadow: 0 1px 4px rgba(212, 175, 55, 0.2);
+            font-weight: 300;
+        }
+
+        .contact-info p {
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+            font-family: var(--font-body);
+        }
+
+        .contact-form {
+            background: var(--primary-black);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--dark-gray);
+        }
+
+        .contact-form h3 {
+            font-family: var(--font-melodrame);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 1px 4px rgba(212, 175, 55, 0.2);
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            font-weight: 500;
+            font-family: var(--font-body);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary-black);
+            border: 1px solid var(--dark-gray);
+            border-radius: 10px;
+            color: var(--white);
+            font-family: var(--font-body);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-gray);
+        }
+
+        footer p {
+            color: var(--light-gray);
+            font-family: var(--font-body);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+                position: static;
+                width: auto;
+                background: none;
+                flex-direction: row;
+                padding: 0;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-black);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                border-top: 1px solid var(--dark-gray);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-item h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-text h2,
+            .contact-info h3,
+            .contact-form h3 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-item {
+                min-width: auto;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element.gold {
+            color: var(--gold);
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            bottom: 30%;
+            left: 5%;
+            font-size: 2rem;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Logo styling */
+        .logo img {
+            height: 120px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="https://i.imgur.com/tI7egc0.png" alt="Xesc Gourmet Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inici">Inici</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#nosaltres">Nosaltres</a></li>
+                <li><a href="#contacte">Contacte</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/34689111733?text=Hola!%20M'agradaria%20fer%20una%20comanda%20a%20Xesc%20Gourmet" 
+       class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        📱
+    </a>
+
+    <main>
+        <section class="hero" id="inici">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Xesc Gourmet</h1>
+                    <p class="subtitle">Cuina Gourmet a Casa Teva</p>
+                    <p class="description">
+                        Descobreix l'autèntic sabor de la cuina mediterrània amb els nostres plats estrella: 
+                        l'Arroz Negro i els Canelons artesanals. Delivery ràpid i qualitat excepcional.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#menu" class="btn btn-primary">Veure Menú</a>
+                        <a href="#contacte" class="btn btn-whatsapp" id="makeOrderBtn">📱 Fer Comanda</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu" id="menu">
+            <div class="container">
+                <h2 class="section-title">Els Nostres Plats Estrella</h2>
+                <div class="menu-grid">
+                    <div class="menu-item fade-in">
+                        <div class="menu-item-image"></div>
+                        <div class="menu-item-content">
+                            <h3>Arròs negre</h3>
+                            <p>
+                                Un clàssic de la cuina mediterrània elaborat amb els millors ingredients: 
+                                arròs bomba, sípia fresca, gambes, all i julivert. Cuinat amb el fons 
+                                de peix més aromàtic per aconseguir aquest color i sabor únics.
+                            </p>
+                            <div class="price">10,00 € /pers. <small>(mín. 2)</small></div>
+                        </div>
+                    </div>
+                    <div class="menu-item fade-in">
+                        <div class="menu-item-image"></div>
+                        <div class="menu-item-content">
+                            <h3>Canelons gourmet</h3>
+                            <p>
+                                Canelons fets a mà amb pasta fresca, farcits amb un ragú de carn de vedella 
+                                i porc, bechamel casolana i gratinats amb formatge parmesà. La recepta 
+                                tradicional que et transportarà a casa de l'àvia.
+                            </p>
+                            <div class="price">9,00 € /tres unts.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="nosaltres">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <h2>La Nostra Passió</h2>
+                        <p>
+                            A Xesc Gourmet, creiem que la bona cuina no ha de ser només per a ocasions especials. 
+                            Cada plat que elaborem porta la passió i l'experiència de més de 20 anys en la restauració.
+                        </p>
+                        <p>
+                            Utilitzem només ingredients de primera qualitat, respectem les receptes tradicionals 
+                            i aplicem tècniques culinàries que realcen el sabor natural de cada ingredient.
+                        </p>
+                        <p>
+                            El nostre servei de delivery et permet gaudir d'aquesta experiència gourmet 
+                            des de la comoditat de casa teva, mantenint sempre la qualitat i el sabor intactes.
+                        </p>
+                    </div>
+                    <div class="about-image fade-in"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contacte">
+            <div class="container">
+                <h2 class="section-title">Contacte</h2>
+                <div class="contact-content">
+                    <div class="contact-info fade-in">
+                        <h3>Informació de Contacte</h3>
+                        <p><strong>Telèfon:</strong> +34 93 XXX XX XX</p>
+                        <p><strong>Email:</strong> info@xescgourmet.cat</p>
+                        <p><strong>Horari:</strong></p>
+                        <p>Dilluns a Divendres: 12:00 - 15:00 | 19:00 - 23:00</p>
+                        <p>Caps de setmana: 12:00 - 23:00</p>
+                        <p><strong>Zona de Repartiment:</strong> Barcelona i àrea metropolitana</p>
+                        <p><strong>Temps de Lliurament:</strong> 30-45 minuts</p>
+                    </div>
+                    <div class="contact-form fade-in">
+                        <h3>Fes la teva Comanda</h3>
+                        <form id="orderForm">
+                            <div class="form-group">
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefon">Telèfon</label>
+                                <input type="tel" id="telefon" name="telefon" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adreca">Adreça de Lliurament</label>
+                                <input type="text" id="adreca" name="adreca" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comanda">Comanda</label>
+                                <textarea id="comanda" name="comanda" rows="4" placeholder="Especifica els plats i quantitats..."></textarea>
+                            </div>
+                            <button type="button" class="btn btn-whatsapp" id="whatsappOrderBtn">📱 Enviar Comanda per WhatsApp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Xesc Gourmet. Tots els drets reservats.</p>
+        </div>
+    </footer>
+
+    <script>
+        // CONFIGURACIÓ - CANVIA AQUEST NÚMERO PEL TEU NÚMERO REAL DE WHATSAPP
+        const WHATSAPP_NUMBER = "34XXXXXXXXX"; // Canvia per el teu número (exemple: 34666777888)
+
+        // Smooth scrolling for all anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, setting up smooth scrolling');
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                console.log('Found anchor:', anchor);
+                anchor.addEventListener('click', function (e) {
+                    console.log('Button clicked:', this.getAttribute('href'));
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    console.log('Target element:', target);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        console.log('Scrolling to:', targetId);
+                    }
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+
+        // Función para obtener datos del formulario y crear mensaje de WhatsApp
+        function createWhatsAppOrder() {
+            const nom = document.getElementById('nom').value;
+            const telefon = document.getElementById('telefon').value;
+            const adreca = document.getElementById('adreca').value;
+            const comanda = document.getElementById('comanda').value;
+
+            // Validar campos obligatorios
+            if (!nom || !telefon || !adreca) {
+                alert('Si us plau, completa tots els camps obligatoris (Nom, Telèfon i Adreça).');
+                return;
+            }
+
+            // Crear mensaje para WhatsApp
+            const message = ` *NOVA COMANDA - XESC GOURMET* 
+
+*Dades del client:*
+• Nom: ${nom}
+• Telèfon: ${telefon}
+• Adreça: ${adreca}
+
+*Comanda:*
+${comanda || 'A especificar durant la trucada'}
+
+Gràcies! Espero la vostra confirmació.`;
+
+            // Crear URL de WhatsApp
+            const whatsappUrl = `https://wa.me/${34689111733}?text=${encodeURIComponent(message)}`;
+            
+            // Obrir WhatsApp
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Event listeners para los botones de WhatsApp
+        document.getElementById('whatsappOrderBtn').addEventListener('click', createWhatsAppOrder);
+        
+        // También para el botón "Fer Comanda" del hero
+        document.getElementById('makeOrderBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Hacer scroll suave al formulario
+            document.getElementById('contacte').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
